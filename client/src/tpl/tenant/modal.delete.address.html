@@ -1,0 +1,22 @@
+<div class="modal-body wrapper-lg">
+  <div class="row">
+    <h3 class="m-t-none m-b font-thin text-danger">
+      <i class="fa fa-warning"></i>
+      Delete Address?
+    </h3>
+    <form role="form">
+      <div class="form-group">
+        <p>Are you sure want to delete this address: <strong>{{item.name}}</strong>?</p>
+        <span class="col-sm-2">Street:</span><p>{{item.street}}</p>
+        <span class="col-sm-2">City:</span><p>{{item.city}}</p>
+        <span class="col-sm-2">Province:</span><p>{{item.province}}</p>
+      </div>
+      <div class="checkbox m-t-lg">
+        <button type="submit" class="btn btn-sm btn-success pull-right text-uc m-t-n-xs" ng-click="ok()">
+          <strong>Delete</strong>
+        </button>
+        <button class="btn btn-sm pull-right text-uc m-t-n-xs" ng-click="cancel()">Cancel</button>
+      </div>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,16 @@
+<div class="modal-body wrapper-lg">
+  <div class="row">
+    <h3 class="m-t-none m-b font-thin">Delete tenant?</h3>
+    <form role="form">
+      <div class="form-group">
+        <p>Are you sure want to delete tenant: <strong>{{item.name}}</strong>?</p>
+      </div>
+      <div class="checkbox m-t-lg">
+        <button type="submit" class="btn btn-sm btn-success pull-right text-uc m-t-n-xs" ng-click="ok()">
+          <strong>Delete</strong>
+        </button>
+        <button class="btn btn-sm pull-right text-uc m-t-n-xs" ng-click="cancel()">Cancel</button>
+      </div>
+    </form>
+  </div>
+</div>

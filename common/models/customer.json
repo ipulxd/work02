@@ -1,0 +1,44 @@
+{
+  "name": "Customer",
+  "base": "PersistedModel",
+  "strict": false,
+  "idInjection": false,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "sex": {
+      "type": "string"
+    },
+    "dateOfBirth": {
+      "type": "date"
+    },
+    "IdCardNumber": {
+      "type": "string"
+    },
+    "additionalProperties": {
+      "type": "string"
+    },
+    "id": {
+      "type": "number",
+      "id": true
+    },
+    "nationality": {
+      "type": "string"
+    }
+  },
+  "validations": [],
+  "relations": {
+    "addresses": {
+      "type": "hasMany",
+      "model": "Address",
+      "foreignKey": "customerId"
+    }
+  },
+  "acls": [],
+  "methods": {}
+}

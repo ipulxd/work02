@@ -1,0 +1,12 @@
+<div class="wrapper-md" ng-controller="TenantNewCtrl">
+  <div class="panel panel-default">
+    <div class="panel-heading font-bold">
+      Add Tenant
+    </div>
+    <div class="panel-body">
+    <form class="form-horizontal form-validation" role="form" ng-submit="addTenant()" name="form">
+      <div ng-include="'tpl/tenant/form.html'"></div>
+    </form>
+    </div>
+  </div>
+</div>

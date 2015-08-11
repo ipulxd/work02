@@ -1,0 +1,81 @@
+<div class="bg-light lter b-b wrapper-md">
+  <h1 class="m-n font-thin h3" >
+    <i class="fa fa-user m-r-xs"></i>
+    Tenant
+  </h1>
+</div>
+<div class="wrapper-md" ng-controller="TenantIndexCtrl">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <a ui-sref="app.tenant.new" class="btn btn-sm btn-success">
+        <i class="glyphicon glyphicon-plus"></i> Add New Tenant
+      </a>
+    </div>
+    <table st-table="displayTenants" st-safe-src="tenants" class="table table-striped">
+      <thead>
+      <tr>
+        <th st-sort="name">Name</th>
+        <th st-sort="tenantType">Type</th>
+        <th st-sort="contactPhone">Phone</th>
+        <th st-sort="contactPerson">Contact Person</th>
+        <th st-sort="statusCode">Status</th>
+        <th st-sort="created">Created</th>
+        <th width="50"></th>
+      </tr>
+      <tr>
+        <th>
+          <input st-search="'name'" placeholder="search.." class="input-sm form-control" type="search"/>
+        </th>
+        <th>
+          <input st-search="'tenantType'"  placeholder="search.." class="input-sm form-control" type="search"/>
+        </th>
+        <th>
+          <input st-search="'contactPhone'"  placeholder="search.." class="input-sm form-control" type="search"/>
+        </th>
+        <th>
+          <input st-search="'contactPerson'" placeholder="search contact.." class="input-sm form-control" type="search"/>
+        </th>
+        <th>
+          <select ng-model="searchparam.statusCode" class="input-sm form-control">
+            <option value="">All</option>
+            <option value="Active">Active</option>
+            <option value="NotActive">Not Active</option>
+          </select>
+        </th>
+        <th>
+        </th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr ng-repeat="row in displayTenants | filter: searchparam">
+        <td>{{row.name}}</td>
+        <td>{{row.tenantType}}</td>
+        <td>{{row.contactPhone}}</td>
+        <td>{{row.contactPerson}}</td>
+        <td>{{row.statusCode}}</td>
+        <td>{{row.created | date : "dd-MMM-yyyy"}}</td>
+        <td style="white-space: nowrap">
+          <div class="buttons">
+            <a ui-sref="app.tenant.detail({ id: row.id })" class="btn btn-xs btn-info" tooltip="Detail">
+              <i class="fa fa-bars"></i>
+            </a>
+            <a ui-sref="app.tenant.edit({ id: row.id })" class="btn btn-xs btn-primary" tooltip="Edit">
+              <i class="fa fa-edit"></i>
+            </a>
+            <a ng-click="remove(row)" class="btn btn-xs btn-danger" tooltip="Delete">
+              <i class="fa fa-times"></i>
+            </a>
+          </div>
+        </td>
+      </tr>
+      </tbody>
+      <tfoot>
+      <tr>
+        <td colspan="5" class="text-center">
+          <div st-pagination="" st-items-by-page="itemsByPage" st-displayed-pages="7" class="no-margin"></div>
+        </td>
+      </tr>
+      </tfoot>
+    </table>
+  </div>
+</div>

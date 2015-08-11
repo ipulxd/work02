@@ -1,0 +1,150 @@
+<div class="bg-light lter b-b wrapper-md">
+  <div class="row-fluid">
+    <div class="col-10">
+      <h1 class="m-n font-thin h3">Tenant Details</h1>
+    </div>
+    <div class="col-2 pull-right m-r-md m-t-n-lg">
+      <a href="" onclick="window.history.back()" class="btn btn-default">
+        <i class="fa fa-chevron-left"></i> Back
+      </a>
+    </div>
+  </div>
+</div>
+<div class="wrapper-md" ng-controller="TenantDetailCtrl">
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <div class="row">
+        <div class="col-md-11 h4">
+          <span>
+            Name: <strong>{{tenant.title}} {{tenant.name}}</strong>
+          </span>
+          <span class="label bg-info m-l-xs">
+            <i class="icon-tag h6 m-r-xs"></i>{{tenant.tenantType}}
+          </span>
+          <span class="label bg-success m-l-xs" ng-show="(tenant.statusCode == 'Active')">
+            <i class="icon-check h6 m-r-xs"></i>{{tenant.statusCode}}
+          </span>
+          <span class="label bg-danger m-l-xs" ng-show="(tenant.statusCode != 'Active')">
+            <i class="icon-check h6 m-r-xs"></i>{{tenant.statusCode}}
+          </span>
+          <span class="label bg-dark m-l-xs" ng-show="(tenant.isOwner)">
+            <i class="icon-badge h6 m-r-xs"></i>Owner
+          </span>
+        </div>
+        <div class="col-md-1 pull-right">
+          <a ui-sref="app.tenant.edit({id:tenant.id})" class="btn btn-xs btn-primary">
+            <i class="fa fa-edit"></i> Edit
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="row wrapper-sm">
+      <div class="col-md-4">
+        ID Type: {{tenant.identityType}}
+        <span ng-hide="tenant.identityType">(none)</span>
+      </div>
+      <div class="col-md-4">
+        ID Number: {{tenant.identityNumber}}
+        <span ng-hide="tenant.identityNumber">(none)</span>
+      </div>
+      <div class="col-md-4">
+        Tax Number: {{tenant.taxNumber}}
+        <span ng-hide="tenant.taxNumber">(none)</span>
+      </div>
+    </div>
+    <div class="row wrapper-sm m-t-n-sm" ng-show="(tenant.contactPerson || tenant.contactPhone || tenant.contactEmail)">
+      <div class="col-md-4">
+        Contact Name: {{tenant.contactPerson}}
+        <span ng-hide="tenant.contactPerson">(none)</span>
+      </div>
+      <div class="col-md-4">
+        Phone: {{tenant.contactPhone}}
+        <span ng-hide="tenant.contactPhone">(none)</span>
+      </div>
+      <div class="col-md-4">
+        Email: {{tenant.contactEmail}}
+        <span ng-hide="tenant.contactEmail">(none)</span>
+      </div>
+    </div>
+    <div class="row wrapper-sm m-t-n-sm">
+      <div class="col-md-4">
+        Rent to:
+        <a ui-sref="app.tenant.detail({id:tenant.parent.id})">
+          {{tenant.parent.name}}<i class="m-l-xs icon-share-alt"></i>
+        </a>
+        <span ng-hide="tenant.parent">(none)</span>
+      </div>
+      <div class="col-md-4">
+        Created: {{tenant.created | date : "dd-MMM-yyyy H:mm:ss"}}
+        <span ng-hide="tenant.created">(none)</span>
+      </div>
+      <div class="col-md-4">
+        Updated: {{tenant.updated | date : "dd-MMM-yyyy H:mm:ss"}}
+        <span ng-hide="tenant.updated">(never)</span>
+      </div>
+    </div>
+  </div>
+  <div class="panel b-a">
+    <div class="panel-heading no-border bg-primary">
+      <span class="h4 m-r-sm">Address</span>
+      <button type="button" class="btn btn-xs btn-success" ng-click="addAddress()">
+        <i class="glyphicon glyphicon-plus"></i> Add new
+      </button>
+    </div>
+    <table st-table="tenant.displayAddresses" st-safe-src="tenant.addresses" class="table table-striped">
+      <thead>
+      <tr>
+        <th st-sort="addressType">Type</th>
+        <th st-sort="name">Name</th>
+        <th st-sort="street">Street</th>
+        <th st-sort="city">City</th>
+        <th st-sort="phone">Phone</th>
+        <th></th>
+      </tr>
+      <tr>
+        <th>
+          <input st-search="'addressType'" class="input-sm form-control" type="search"/>
+        </th>
+        <th>
+          <input st-search="'name'" class="input-sm form-control" type="search"/>
+        </th>
+        <th>
+          <input st-search="'street'" class="input-sm form-control" type="search"/>
+        </th>
+        <th>
+          <input st-search="'city'" class="input-sm form-control" type="search"/>
+        </th>
+        <th>
+          <input st-search="'phone'" class="input-sm form-control" type="search"/>
+        </th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr ng-repeat="row in tenant.displayAddresses">
+        <td>{{row.addressType}}</td>
+        <td>{{row.name}}</td>
+        <td>{{row.street | limitTo:50}}</td>
+        <td>{{row.city}}</td>
+        <td>{{row.phone}}</td>
+        <td style="white-space: nowrap">
+          <div class="buttons">
+            <a ng-click="editAddress(row)" class="btn btn-xs btn-success" tooltip="Delete">
+              <i class="fa fa-edit"></i> edit
+            </a>
+            <a ng-click="removeAddress(row)" class="btn btn-xs btn-danger" tooltip="Delete">
+              <i class="fa fa-times"></i> del
+            </a>
+          </div>
+        </td>
+      </tr>
+      </tbody>
+      <tfoot>
+      <tr>
+        <td colspan="5" class="text-center">
+          <div st-pagination="" st-items-by-page="itemsByPage" st-displayed-pages="7" class="no-margin"></div>
+        </td>
+      </tr>
+      </tfoot>
+    </table>
+  </div>
+</div>

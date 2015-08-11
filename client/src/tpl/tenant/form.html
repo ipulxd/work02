@@ -1,0 +1,135 @@
+<div class="row">
+  <div class="col-sm-6">
+    <div class="form-group">
+      <label class="col-sm-3 control-label">Name</label>
+      <div class="col-sm-9">
+        <input type="text" class="form-control" ng-model="tenant.name" required >
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-sm-3 control-label">Title</label>
+      <div class="col-sm-9">
+        <input type="text" class="form-control" ng-model="tenant.title" >
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-sm-3 control-label">Contact Name</label>
+      <div class="col-sm-9">
+        <input type="text" class="form-control" ng-model="tenant.contactPerson" >
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-sm-3 control-label">Contact Phone</label>
+      <div class="col-sm-9">
+        <input type="text" class="form-control" ng-model="tenant.contactPhone" >
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-sm-3 control-label">Contact Email</label>
+      <div class="col-sm-9">
+        <input type="email" class="form-control" ng-model="tenant.contactEmail" >
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-sm-3 control-label">Is Active?</label>
+      <div class="col-sm-9">
+        <label class="i-switch bg-success m-t-xs m-r">
+          <input type="checkbox" ng-model="tenant.isActive">
+          <i></i>
+        </label>
+      </div>
+    </div>
+  </div>
+  <div class="col-sm-6">
+    <div class="form-group">
+      <label class="col-sm-3 control-label">Type</label>
+      <div class="col-sm-9">
+        <div class="input-group">
+          <ui-select ng-model="tenant.tenantType" theme="bootstrap" ng-required="true">
+            <ui-select-match placeholder="Select or search in the list...">{{$select.selected.code}}</ui-select-match>
+            <ui-select-choices repeat="item.code as item in tenantTypeOptions | filter: $select.search">
+              <div ng-bind-html="item.code | highlight: $select.search"></div>
+            </ui-select-choices>
+          </ui-select>
+          <span class="input-group-btn">
+            <button type="button" class="btn btn-default">
+              <span class="glyphicon glyphicon-trash"></span>
+            </button>
+          </span>
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-sm-3 control-label">Identity</label>
+      <div class="col-sm-9">
+        <div class="input-group">
+          <ui-select ng-model="tenant.identityType" theme="bootstrap" ng-required="true">
+            <ui-select-match placeholder="Select or search in the list...">{{$select.selected.code}}</ui-select-match>
+            <ui-select-choices repeat="item.code as item in identityTypeOptions | filter: $select.search">
+              <div ng-bind-html="item.code | highlight: $select.search"></div>
+            </ui-select-choices>
+          </ui-select>
+          <span class="input-group-btn">
+            <button type="button" class="btn btn-default">
+              <span class="glyphicon glyphicon-trash"></span>
+            </button>
+          </span>
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-sm-3 control-label">Identity Number</label>
+      <div class="col-sm-9">
+        <input type="text" class="form-control" ng-model="tenant.identityNumber" >
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-sm-3 control-label">Tax Number</label>
+      <div class="col-sm-9">
+        <input type="text" class="form-control" ng-model="tenant.taxNumber" >
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-sm-3 control-label">Is Owner?</label>
+      <div class="col-sm-9">
+        <label class="i-switch bg-success m-t-xs m-r">
+          <input type="checkbox" ng-model="tenant.isOwner">
+          <i></i>
+        </label>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="col-sm-3 control-label">Rent to</label>
+      <div class="col-sm-9">
+        <div class="input-group">
+          <ui-select ng-model="tenant.parentId" theme="bootstrap" ng-disabled="(tenant.isOwner)">
+            <ui-select-match placeholder="Select or search in the list...">{{$select.selected.name}}</ui-select-match>
+            <ui-select-choices repeat="item.id as item in parentTenantOptions | filter: $select.search">
+              <div ng-bind-html="item.name | highlight: $select.search"></div>
+              <small ng-bind="'ID#'+item.identityNumber | highlight: $select.search"></small>
+            </ui-select-choices>
+          </ui-select>
+          <span class="input-group-btn">
+            <button type="button" ng-click="tenant.parentId=undefined" class="btn btn-default">
+              <span class="glyphicon glyphicon-trash"></span>
+            </button>
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+<div class="row">
+  <div class="pull-right m-r-sm">
+    <button type="submit" class="btn btn-primary" ng-disabled="form.$invalid">
+      <strong>Save & Edit Address</strong>
+    </button>
+    <a href="" onclick="window.history.back()" class="btn btn-default">
+      Cancel
+    </a>
+    <button type="submit" class="btn btn-success m-r-xs" ng-disabled="form.$invalid">
+      <strong>Save</strong>
+    </button>
+  </div>
+</div>
